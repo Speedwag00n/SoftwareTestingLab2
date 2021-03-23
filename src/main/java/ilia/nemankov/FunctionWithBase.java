@@ -13,8 +13,4 @@ public abstract class FunctionWithBase extends Function {
         return base;
     }
 
-    public void setBase(int base) {
-        this.base = base;
-    }
-
 }

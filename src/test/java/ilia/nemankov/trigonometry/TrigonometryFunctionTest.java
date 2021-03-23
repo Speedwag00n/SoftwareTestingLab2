@@ -1,0 +1,50 @@
+package ilia.nemankov.trigonometry;
+
+import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvFileSource;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.TestInstance.Lifecycle.PER_CLASS;
+
+@TestInstance(value=PER_CLASS)
+public class TrigonometryFunctionTest {
+
+    private static final double DELTA = 0.05;
+    private static final double ACCURACY = 0.0001;
+
+    private TrigonometryFunction trigonometryFunction;
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigonometry_function_test_data.csv")
+    public void tableValuesStubsTest(float x, float expected) {
+        trigonometryFunction = new TrigonometryFunction(ACCURACY);
+        trigonometryFunction.setCos(TrigonometryMocks.getCosMock());
+        trigonometryFunction.setCsc(TrigonometryMocks.getCscMock());
+        double actual = trigonometryFunction.calculate(x);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigonometry_function_test_data.csv")
+    public void tableValuesCosStubTest(float x, float expected) {
+        trigonometryFunction = new TrigonometryFunction(ACCURACY);
+        trigonometryFunction.setCos(TrigonometryMocks.getCosMock());
+        Csc csc = new Csc(ACCURACY);
+        csc.setCos(TrigonometryMocks.getCosMock());
+        trigonometryFunction.setCsc(csc);
+        double actual = trigonometryFunction.calculate(x);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @ParameterizedTest
+    @CsvFileSource(resources = "/trigonometry_function_test_data.csv")
+    public void tableValuesTest(float x, float expected) {
+        trigonometryFunction = new TrigonometryFunction(ACCURACY);
+        trigonometryFunction.setCos(TrigonometryMocks.getCosMock());
+        trigonometryFunction.setCsc(TrigonometryMocks.getCscMock());
+        double actual = trigonometryFunction.calculate(x);
+        assertEquals(expected, actual, DELTA);
+    }
+
+}

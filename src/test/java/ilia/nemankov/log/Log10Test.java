@@ -1,7 +1,6 @@
 package ilia.nemankov.log;
 
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,20 +18,53 @@ public class Log10Test {
 
     private Log10 log10;
 
-    @BeforeAll
-    public void init() {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/log10_test_data.csv")
+    public void tableValuesStubsTest(float x, float expected) {
         log10 = new Log10(ACCURACY);
+        log10.setLn(LogMocks.getLnMock());
+        double actual = log10.calculate(x);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @Test
+    public void nanStubsTest() {
+        log10 = new Log10(ACCURACY);
+        log10.setLn(LogMocks.getLnMock());
+        double expected = Double.NaN;
+        double actual = log10.calculate(Double.NaN);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @Test
+    public void positiveInfinityStubsTest() {
+        log10 = new Log10(ACCURACY);
+        log10.setLn(LogMocks.getLnMock());
+        double expected = Double.NaN;
+        double actual = log10.calculate(Double.NaN);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @Test
+    public void negativeInfinityStubsTest() {
+        log10 = new Log10(ACCURACY);
+        log10.setLn(LogMocks.getLnMock());
+        double expected = Double.NaN;
+        double actual = log10.calculate(Double.NEGATIVE_INFINITY);
+        assertEquals(expected, actual, DELTA);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/log10_test_data.csv")
     public void tableValuesTest(float x, float expected) {
+        log10 = new Log10(ACCURACY);
         double actual = log10.calculate(x);
         assertEquals(expected, actual, DELTA);
     }
 
     @Test
     public void nanTest() {
+        log10 = new Log10(ACCURACY);
         double expected = Double.NaN;
         double actual = log10.calculate(Double.NaN);
         assertEquals(expected, actual, DELTA);
@@ -40,13 +72,15 @@ public class Log10Test {
 
     @Test
     public void positiveInfinityTest() {
-        double expected = Double.NaN;;
+        log10 = new Log10(ACCURACY);
+        double expected = Double.NaN;
         double actual = log10.calculate(Double.NaN);
         assertEquals(expected, actual, DELTA);
     }
 
     @Test
     public void negativeInfinityTest() {
+        log10 = new Log10(ACCURACY);
         double expected = Double.NaN;
         double actual = log10.calculate(Double.NEGATIVE_INFINITY);
         assertEquals(expected, actual, DELTA);

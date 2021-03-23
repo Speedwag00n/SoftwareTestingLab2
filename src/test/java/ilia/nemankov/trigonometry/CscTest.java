@@ -1,7 +1,6 @@
 package ilia.nemankov.trigonometry;
 
 
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,20 +18,53 @@ public class CscTest {
 
     private Csc csc;
 
-    @BeforeAll
-    public void init() {
+    @ParameterizedTest
+    @CsvFileSource(resources = "/csc_test_data.csv")
+    public void tableValuesStubsTest(float x, float expected) {
         csc = new Csc(ACCURACY);
+        csc.setCos(TrigonometryMocks.getCosMock());
+        double actual = csc.calculate(x);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @Test
+    public void nanStubsTest() {
+        csc = new Csc(ACCURACY);
+        csc.setCos(TrigonometryMocks.getCosMock());
+        double expected = Double.NaN;
+        double actual = csc.calculate(Double.NaN);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @Test
+    public void positiveInfinityStubsTest() {
+        csc = new Csc(ACCURACY);
+        csc.setCos(TrigonometryMocks.getCosMock());
+        double expected = Double.NaN;
+        double actual = csc.calculate(Double.POSITIVE_INFINITY);
+        assertEquals(expected, actual, DELTA);
+    }
+
+    @Test
+    public void negativeInfinityStubsTest() {
+        csc = new Csc(ACCURACY);
+        csc.setCos(TrigonometryMocks.getCosMock());
+        double expected = Double.NaN;
+        double actual = csc.calculate(Double.NEGATIVE_INFINITY);
+        assertEquals(expected, actual, DELTA);
     }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/csc_test_data.csv")
     public void tableValuesTest(float x, float expected) {
+        csc = new Csc(ACCURACY);
         double actual = csc.calculate(x);
         assertEquals(expected, actual, DELTA);
     }
 
     @Test
     public void nanTest() {
+        csc = new Csc(ACCURACY);
         double expected = Double.NaN;
         double actual = csc.calculate(Double.NaN);
         assertEquals(expected, actual, DELTA);
@@ -40,13 +72,15 @@ public class CscTest {
 
     @Test
     public void positiveInfinityTest() {
-        double expected = Double.NaN;;
+        csc = new Csc(ACCURACY);
+        double expected = Double.NaN;
         double actual = csc.calculate(Double.POSITIVE_INFINITY);
         assertEquals(expected, actual, DELTA);
     }
 
     @Test
     public void negativeInfinityTest() {
+        csc = new Csc(ACCURACY);
         double expected = Double.NaN;
         double actual = csc.calculate(Double.NEGATIVE_INFINITY);
         assertEquals(expected, actual, DELTA);

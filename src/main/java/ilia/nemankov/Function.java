@@ -15,10 +15,6 @@ public abstract class Function {
         return precision;
     }
 
-    public void setPrecision(double precision) {
-        this.precision = precision;
-    }
-
     public abstract double calculate(double x);
 
 }

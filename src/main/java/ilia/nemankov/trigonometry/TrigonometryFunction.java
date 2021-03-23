@@ -19,4 +19,12 @@ public class TrigonometryFunction extends Function {
         return cos.calculate(x) * csc.calculate(x);
     }
 
+    public void setCos(Cos cos) {
+        this.cos = cos;
+    }
+
+    public void setCsc(Csc csc) {
+        this.csc = csc;
+    }
+
 }

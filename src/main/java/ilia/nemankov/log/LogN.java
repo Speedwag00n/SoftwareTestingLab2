@@ -13,16 +13,10 @@ public class LogN extends FunctionWithBase {
 
     @Override
     public double calculate(double x) {
-        if (getBase() <= 0 || getBase() == 1) {
-            return Double.NaN;
-        }
-
         return ln.calculate(x) / ln.calculate(getBase());
     }
 
-    @Override
-    public void setPrecision(double precision){
-        super.setPrecision(precision);
-        ln.setPrecision(precision);
+    public void setLn(Ln ln) {
+        this.ln = ln;
     }
 }

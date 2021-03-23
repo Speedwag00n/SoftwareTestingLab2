@@ -24,4 +24,19 @@ public class LogFunction extends Function {
                 * (((log10.calculate(x) * log10.calculate(x)) + log5.calculate(x)) - log2.calculate(x)));
     }
 
+    public void setLn(Ln ln) {
+        this.ln = ln;
+    }
+
+    public void setLog2(Log2 log2) {
+        this.log2 = log2;
+    }
+
+    public void setLog5(Log5 log5) {
+        this.log5 = log5;
+    }
+
+    public void setLog10(Log10 log10) {
+        this.log10 = log10;
+    }
 }

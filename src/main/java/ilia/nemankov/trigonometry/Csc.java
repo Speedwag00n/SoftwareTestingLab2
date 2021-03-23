@@ -6,7 +6,6 @@ import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
 
-import static java.lang.Double.NaN;
 import static java.lang.Math.PI;
 
 public class Csc extends Function  {
@@ -20,9 +19,17 @@ public class Csc extends Function  {
         cos = new Cos(precision);
     }
 
+    public void setCos(Cos cos) {
+        this.cos = cos;
+    }
+
     @Override
     public double calculate(double x) {
         if (Double.isNaN(x) || Double.isInfinite(x)) {
+            return Double.NaN;
+        }
+
+        if (Math.abs(x % PI) < getPrecision()) {
             return Double.NaN;
         }
 
@@ -38,16 +45,12 @@ public class Csc extends Function  {
 
         do {
             previousValue = currentValue;
-            try {
-                currentValue = sqrt(
-                        new BigDecimal(1, MathContext.UNLIMITED)
-                                .divide(new BigDecimal(1, MathContext.UNLIMITED)
-                                .subtract(new BigDecimal(cosine * cosine, MathContext.UNLIMITED)), iteration, RoundingMode.UP),
-                        iteration
-                );
-            } catch (ArithmeticException e) {
-                return NaN;
-            }
+            currentValue = sqrt(
+                    new BigDecimal(1, MathContext.UNLIMITED)
+                            .divide(new BigDecimal(1, MathContext.UNLIMITED)
+                            .subtract(new BigDecimal(cosine * cosine, MathContext.UNLIMITED)), iteration, RoundingMode.UP),
+                    iteration
+            );
             iteration++;
         } while (getPrecision() <= currentValue.subtract(previousValue).abs().doubleValue() && iteration < MAX_ITERATIONS);
 
