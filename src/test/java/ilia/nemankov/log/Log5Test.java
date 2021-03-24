@@ -63,36 +63,4 @@ public class Log5Test {
         assertEquals(expected, actual, DELTA);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/log5_test_data.csv")
-    public void tableValuesTest(float x, float expected) {
-        log5 = new Log5(ACCURACY);
-        double actual = log5.calculate(x);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void nanTest() {
-        log5 = new Log5(ACCURACY);
-        double expected = Double.NaN;
-        double actual = log5.calculate(Double.NaN);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void positiveInfinityTest() {
-        log5 = new Log5(ACCURACY);
-        double expected = Double.NaN;;
-        double actual = log5.calculate(Double.NaN);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void negativeInfinityTest() {
-        log5 = new Log5(ACCURACY);
-        double expected = Double.NaN;
-        double actual = log5.calculate(Double.NEGATIVE_INFINITY);
-        assertEquals(expected, actual, DELTA);
-    }
-
 }

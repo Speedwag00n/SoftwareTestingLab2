@@ -38,30 +38,4 @@ public class LogFunctionTest {
         assertEquals(expected, actual, DELTA);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/log_function_test_data.csv")
-    public void tableValuesLnStubTest(float x, float expected) {
-        logFunction = new LogFunction(ACCURACY);
-        logFunction.setLn(LogMocks.getLnMock());
-        Log2 log2 = new Log2(ACCURACY);
-        log2.setLn(LogMocks.getLnMock());
-        logFunction.setLog2(log2);
-        Log5 log5 = new Log5(ACCURACY);
-        log5.setLn(LogMocks.getLnMock());
-        logFunction.setLog5(log5);
-        Log10 log10 = new Log10(ACCURACY);
-        log10.setLn(LogMocks.getLnMock());
-        logFunction.setLog10(log10);
-        double actual = logFunction.calculate(x);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @ParameterizedTest
-    @CsvFileSource(resources = "/log_function_test_data.csv")
-    public void tableValuesTest(float x, float expected) {
-        logFunction = new LogFunction(ACCURACY);
-        double actual = logFunction.calculate(x);
-        assertEquals(expected, actual, DELTA);
-    }
-
 }

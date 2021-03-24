@@ -63,36 +63,4 @@ public class CscTest {
         assertEquals(expected, actual, DELTA);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/csc_test_data.csv")
-    public void tableValuesTest(float x, float expected) {
-        csc = new Csc(ACCURACY);
-        double actual = csc.calculate(x);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void nanTest() {
-        csc = new Csc(ACCURACY);
-        double expected = Double.NaN;
-        double actual = csc.calculate(Double.NaN);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void positiveInfinityTest() {
-        csc = new Csc(ACCURACY);
-        double expected = Double.NaN;
-        double actual = csc.calculate(Double.POSITIVE_INFINITY);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void negativeInfinityTest() {
-        csc = new Csc(ACCURACY);
-        double expected = Double.NaN;
-        double actual = csc.calculate(Double.NEGATIVE_INFINITY);
-        assertEquals(expected, actual, DELTA);
-    }
-
 }

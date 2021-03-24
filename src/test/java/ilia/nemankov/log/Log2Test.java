@@ -63,36 +63,4 @@ public class Log2Test {
         assertEquals(expected, actual, DELTA);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/log2_test_data.csv")
-    public void tableValuesTest(float x, float expected) {
-        log2 = new Log2(ACCURACY);
-        double actual = log2.calculate(x);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void nanTest() {
-        log2 = new Log2(ACCURACY);
-        double expected = Double.NaN;
-        double actual = log2.calculate(Double.NaN);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void positiveInfinityTest() {
-        log2 = new Log2(ACCURACY);
-        double expected = Double.NaN;;
-        double actual = log2.calculate(Double.NaN);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @Test
-    public void negativeInfinityTest() {
-        log2 = new Log2(ACCURACY);
-        double expected = Double.NaN;
-        double actual = log2.calculate(Double.NEGATIVE_INFINITY);
-        assertEquals(expected, actual, DELTA);
-    }
-
 }

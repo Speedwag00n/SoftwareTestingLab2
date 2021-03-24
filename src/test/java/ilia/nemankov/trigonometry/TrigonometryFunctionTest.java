@@ -34,26 +34,4 @@ public class TrigonometryFunctionTest {
         assertEquals(expected, actual, DELTA);
     }
 
-    @ParameterizedTest
-    @CsvFileSource(resources = "/trigonometry_function_test_data.csv")
-    public void tableValuesCosStubTest(float x, float expected) {
-        trigonometryFunction = new TrigonometryFunction(ACCURACY);
-        trigonometryFunction.setCos(TrigonometryMocks.getCosMock());
-        Csc csc = new Csc(ACCURACY);
-        csc.setCos(TrigonometryMocks.getCosMock());
-        trigonometryFunction.setCsc(csc);
-        double actual = trigonometryFunction.calculate(x);
-        assertEquals(expected, actual, DELTA);
-    }
-
-    @ParameterizedTest
-    @CsvFileSource(resources = "/trigonometry_function_test_data.csv")
-    public void tableValuesTest(float x, float expected) {
-        trigonometryFunction = new TrigonometryFunction(ACCURACY);
-        trigonometryFunction.setCos(TrigonometryMocks.getCosMock());
-        trigonometryFunction.setCsc(TrigonometryMocks.getCscMock());
-        double actual = trigonometryFunction.calculate(x);
-        assertEquals(expected, actual, DELTA);
-    }
-
 }
