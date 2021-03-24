@@ -1,6 +1,8 @@
 package ilia.nemankov.log;
 
 
+import ilia.nemankov.CsvLogger;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -22,6 +24,12 @@ public class LnTest {
     @BeforeAll
     public void init() {
         ln = new Ln(ACCURACY);
+    }
+
+    @AfterAll
+    public void logInCSV() {
+        CsvLogger csvLogger = new CsvLogger("csv_output/ln.csv", 1, 5, 0.1);
+        csvLogger.log(ln);
     }
 
     @ParameterizedTest

@@ -1,6 +1,8 @@
 package ilia.nemankov.trigonometry;
 
 
+import ilia.nemankov.CsvLogger;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -17,6 +19,13 @@ public class CscTest {
     private static final double ACCURACY = 0.0001;
 
     private Csc csc;
+
+    @AfterAll
+    public void logInCSV() {
+        csc = new Csc(ACCURACY);
+        CsvLogger csvLogger = new CsvLogger("csv_output/csc.csv", -5, -1, 0.1);
+        csvLogger.log(csc);
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/csc_test_data.csv")

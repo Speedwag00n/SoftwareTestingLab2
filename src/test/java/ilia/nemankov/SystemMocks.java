@@ -3,6 +3,7 @@ package ilia.nemankov;
 import ilia.nemankov.log.LogFunction;
 import ilia.nemankov.trigonometry.Cos;
 import ilia.nemankov.trigonometry.Csc;
+import ilia.nemankov.trigonometry.TrigonometryFunction;
 import org.mockito.AdditionalMatchers;
 
 import static java.lang.Double.NaN;
@@ -24,20 +25,22 @@ public class SystemMocks {
         return logFunction;
     }
 
-    public static LogFunction getTrigonometryFunctionMock() {
-        LogFunction logFunction = mock(LogFunction.class);
+    public static TrigonometryFunction getTrigonometryFunctionMock() {
+        TrigonometryFunction trigonometryFunction = mock(TrigonometryFunction.class);
 
-        when(logFunction.calculate(AdditionalMatchers.eq(-3.1415927, 0.1))).thenReturn(NaN);
-        when(logFunction.calculate(AdditionalMatchers.eq(-2.3561945, 0.1))).thenReturn(1.0);
-        when(logFunction.calculate(AdditionalMatchers.eq(-1.5707963, 0.1))).thenReturn(0.0);
-        when(logFunction.calculate(AdditionalMatchers.eq(-0.7853982, 0.1))).thenReturn(-1.0);
-        when(logFunction.calculate(AdditionalMatchers.eq(0.0, 0.1))).thenReturn(NaN);
-        when(logFunction.calculate(AdditionalMatchers.eq(0.7853982, 0.1))).thenReturn(1.0);
-        when(logFunction.calculate(AdditionalMatchers.eq(1.5707963, 0.1))).thenReturn(0.0);
-        when(logFunction.calculate(AdditionalMatchers.eq(2.3561945, 0.1))).thenReturn(-1.0);
-        when(logFunction.calculate(AdditionalMatchers.eq(3.1415927, 0.1))).thenReturn(NaN);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(-3.1415927, 0.1))).thenReturn(NaN);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(-2.6179939, 0.1))).thenReturn(1.7320508);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(-2.3561945, 0.1))).thenReturn(1.0);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(-1.5707963, 0.1))).thenReturn(0.0);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(-0.7853982, 0.1))).thenReturn(-1.0);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(-0.5235988, 0.1))).thenReturn(-1.7320508);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(0.0, 0.1))).thenReturn(NaN);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(0.7853982, 0.1))).thenReturn(1.0);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(1.5707963, 0.1))).thenReturn(0.0);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(2.3561945, 0.1))).thenReturn(-1.0);
+        when(trigonometryFunction.calculate(AdditionalMatchers.eq(3.1415927, 0.1))).thenReturn(NaN);
 
-        return logFunction;
+        return trigonometryFunction;
     }
 
 }

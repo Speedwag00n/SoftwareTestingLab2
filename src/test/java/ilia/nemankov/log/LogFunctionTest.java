@@ -1,6 +1,8 @@
 package ilia.nemankov.log;
 
 
+import ilia.nemankov.CsvLogger;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -16,6 +18,13 @@ public class LogFunctionTest {
     private static final double ACCURACY = 0.0001;
 
     private LogFunction logFunction;
+
+    @AfterAll
+    public void logInCSV() {
+        logFunction = new LogFunction(ACCURACY);
+        CsvLogger csvLogger = new CsvLogger("csv_output/logFunction.csv", 1, 5, 0.1);
+        csvLogger.log(logFunction);
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/log_function_test_data.csv")

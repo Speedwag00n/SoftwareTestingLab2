@@ -1,6 +1,8 @@
 package ilia.nemankov.log;
 
 
+import ilia.nemankov.CsvLogger;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -18,6 +20,12 @@ public class Log5Test {
 
     private Log5 log5;
 
+    @AfterAll
+    public void logInCSV() {
+        log5 = new Log5(ACCURACY);
+        CsvLogger csvLogger = new CsvLogger("csv_output/log5.csv", 1, 5, 0.1);
+        csvLogger.log(log5);
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/log5_test_data.csv")

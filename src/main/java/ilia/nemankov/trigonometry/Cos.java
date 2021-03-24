@@ -1,7 +1,6 @@
 package ilia.nemankov.trigonometry;
 
 import ilia.nemankov.Function;
-import ilia.nemankov.Utils;
 
 import java.math.BigDecimal;
 import java.math.MathContext;
@@ -35,11 +34,21 @@ public class Cos extends Function {
             previousValue = currentValue;
             currentValue = currentValue.add((new BigDecimal(-1, MathContext.UNLIMITED).pow(iteration)).
                     multiply((new BigDecimal(x, MathContext.UNLIMITED).pow(2 * iteration))).
-                    divide(new BigDecimal(Utils.calculateFactorial(2 * iteration)), SCALE, RoundingMode.HALF_UP));
+                    divide(new BigDecimal(calculateFactorial(2 * iteration)), SCALE, RoundingMode.HALF_UP));
             iteration++;
         } while (getPrecision() <= currentValue.subtract(previousValue).abs().doubleValue() && iteration < MAX_ITERATIONS);
 
         return currentValue.setScale(SCALE, RoundingMode.UP).doubleValue();
+    }
+
+    public double calculateFactorial(int n) {
+        double result = 1;
+
+        for (int i = 1; i <= n; i++) {
+            result *= i;
+        }
+
+        return result;
     }
 
 }

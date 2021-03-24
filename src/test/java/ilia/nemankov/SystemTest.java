@@ -2,7 +2,7 @@ package ilia.nemankov;
 
 import ilia.nemankov.log.LogFunction;
 import ilia.nemankov.trigonometry.TrigonometryFunction;
-import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvFileSource;
@@ -17,6 +17,13 @@ public class SystemTest {
     private static final double ACCURACY = 0.0001;
 
     private FunctionsSystem functionsSystem;
+
+    @AfterAll
+    public void logInCSV() {
+        functionsSystem = new FunctionsSystem(ACCURACY, new TrigonometryFunction(ACCURACY), new LogFunction(ACCURACY));
+        CsvLogger csvLogger = new CsvLogger("csv_output/functionsSystem.csv", -5.1, 4.9, 0.2);
+        csvLogger.log(functionsSystem);
+    }
 
     @ParameterizedTest
     @CsvFileSource(resources = "/functions_system_test_data.csv")

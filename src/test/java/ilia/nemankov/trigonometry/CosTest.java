@@ -1,6 +1,8 @@
 package ilia.nemankov.trigonometry;
 
 
+import ilia.nemankov.CsvLogger;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -29,6 +31,12 @@ public class CosTest {
     public void tableValuesTest(float x, float expected) {
         double actual = cos.calculate(x);
         assertEquals(expected, actual, DELTA);
+    }
+
+    @AfterAll
+    public void logInCSV() {
+        CsvLogger csvLogger = new CsvLogger("csv_output/cos.csv", -5, -1, 0.1);
+        csvLogger.log(cos);
     }
 
     @Test
